@@ -44,17 +44,11 @@ def post_state():
     """Creates a new State"""
     if not request.is_json:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
-
-    try:
-        data = request.get_json()
-    except Exception:
-        return make_response(jsonify({"error": "Not a JSON"}), 400)
-
-    if not data:
-        return make_response(jsonify({"error": "Not a JSON"}), 400)
+    data = request.get_json()
+    if data is None:
+        abort(400, "Not a JSON")
     if 'name' not in data:
-        return make_response(jsonify({"error": "Missing name"}), 400)
-
+        abort(400, "Missing name")
     state = State(**data)
     state.save()
     return make_response(jsonify(state.to_dict()), 201)
