@@ -55,9 +55,9 @@ def post_state():
     if 'name' not in data:
         return make_response(jsonify({"error": "Missing name"}), 400)
 
-    new_state = State(**data)
-    new_state.save()
-    return make_response(jsonify(new_state.to_dict()), 201)
+    state = State(**data)
+    state.save()
+    return make_response(jsonify(state.to_dict()), 201)
 
 
 
