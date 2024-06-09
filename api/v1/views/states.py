@@ -43,7 +43,7 @@ def delete_state(state_id):
 def post_state():
     """ Creates a state """
     if not request.is_json:
-	return make_response(jsonify({"error": "Not a JSON"}), 400)
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     data = request.get_json()
     if data is None:
         abort(400, "Not a JSON")
