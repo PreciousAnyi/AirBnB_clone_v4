@@ -63,6 +63,8 @@ def put_state(state_id):
     data = request.get_json()
     if data is None:
         abort(400, "Not a JSON")
+    if not data:
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     for key, value in data.items():
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(state, key, value)
