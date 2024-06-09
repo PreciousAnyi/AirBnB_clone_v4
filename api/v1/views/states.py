@@ -58,7 +58,7 @@ def post_state():
 def put_state(state_id):
     """ Updates a state """
     state = storage.get(State, state_id)
-    if state is None:
+    if not state:
         abort(404)
     data = request.get_json()
     if data is None:
