@@ -71,10 +71,10 @@ def put_city(city_id):
     if not request.is_json:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     city = storage.get(City, city_id)
-    if city is None:
+    if not city:
         abort(404)
     data = request.get_json()
-    if data is None:
+    if not data:
         abort(400, 'Not a JSON')
     for key, value in data.items():
         if key not in ['id', 'state_id', 'created_at', 'updated_at']:
