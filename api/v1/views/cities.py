@@ -49,6 +49,8 @@ def delete_city(city_id):
                  strict_slashes=False)
 def post_city(state_id):
     """post city"""
+    if not request.is_json:
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
